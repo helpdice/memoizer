@@ -1,0 +1,77 @@
+{
+  "name": "@helpdice/memoizer",
+  "version": "1.0.0",
+  "description": "useMemo and useCallback but with a stable cache",
+  "keywords": [
+    "memoization",
+    "react",
+    "useMemo",
+    "useCallback",
+    "memoize-one"
+  ],
+  "main": "dist/memoizer.cjs.js",
+  "module": "dist/memoizer.esm.js",
+  "sideEffects": false,
+  "files": [
+    "/dist",
+    "/src",
+    "index.d.ts"
+  ],
+  "author": "Helpdice <>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/helpdice/memoizer.git"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/preset-env": "^7.5.2",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
+    "eslint": "^10.14.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^29.17.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.7",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "flow-bin": "^0.102.0",
+    "jest": "^24.8.0",
+    "jest-watch-typeahead": "^0.3.1",
+    "prettier": "^1.18.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.16.7",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-uglify": "^6.0.2"
+  },
+  "config": {
+    "prettier_target": "*.{js,jsx,md,json} src/**/*.{js,jsx,md,json} test/**/*.{js,jsx,md,json}"
+  },
+  "scripts": {
+    "validate": "yarn run lint && yarn run typecheck",
+    "test": "jest",
+    "typecheck": "flow check",
+    "prettier:check": "yarn prettier --debug-check $npm_package_config_prettier_target",
+    "prettier:write": "yarn prettier --write $npm_package_config_prettier_target",
+    "lint:eslint": "eslint src test",
+    "lint": "yarn lint:eslint && yarn prettier:check",
+    "build": "yarn run build:clean && yarn run build:dist && yarn run build:flow",
+    "build:clean": "rimraf dist",
+    "build:dist": "rollup -c",
+    "build:flow": "echo \"// @flow\n\nexport * from '../src';\" > dist/use-memo-one.cjs.js.flow",
+    "prepublish": "yarn run build"
+  }
+}
