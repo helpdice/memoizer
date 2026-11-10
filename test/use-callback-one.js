@@ -1,13 +1,14 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type ReactNode } from 'react';
 import { mount } from 'enzyme';
 import { useCallbackOne } from '../src';
 
-type Props = {|
-  inputs: mixed[],
-  children: (value: mixed) => Node,
+// Exact
+type Props = {
+  inputs: unknown[],
+  children: (value: unknown) => ReactNode,
   callback: Function,
-|};
+};
 
 function WithCallback(props: Props) {
   const fn: Function = useCallbackOne(props.callback, props.inputs);
@@ -35,7 +36,7 @@ it('should return the passed callback until there is an input change', () => {
   wrapper.setProps({ inputs: [1, 2], callback: () => ({ hello: 'world' }) });
 
   expect(mock).toHaveBeenCalledTimes(1);
-  const second: mixed = mock.mock.calls[0][0];
+  const second: unknown = mock.mock.calls[0][0];
   // same reference
   expect(second).toBe(first);
 

@@ -2,24 +2,25 @@
 import { useRef, useState, useEffect } from 'react';
 import areInputsEqual from './are-inputs-equal';
 
-type Cache<T> = {|
-  inputs: ?(mixed[]),
+// Exact
+type Cache<T> = {
+  inputs: (unknown[]) | null,
   result: T,
-|};
+};
 
 export function useMemoOne<T>(
   // getResult changes on every call,
   getResult: () => T,
   // the inputs array changes on every call
-  inputs?: mixed[],
+  inputs?: unknown[],
 ): T {
   // using useState to generate initial value as it is lazy
   const initial: Cache<T> = useState(() => ({
     inputs,
     result: getResult(),
   }))[0];
-  const isFirstRun = useRef<boolean>(true);
-  const committed = useRef<Cache<T>>(initial);
+  const isFirstRun = useRef(true);
+  const committed = useRef(initial);
 
   // persist any uncommitted changes after they have been committed
   const useCache: boolean =
@@ -47,11 +48,11 @@ export function useMemoOne<T>(
   return cache.result;
 }
 
-export function useCallbackOne<T: Function>(
+export function useCallbackOne<T>(
   // getResult changes on every call,
   callback: T,
   // the inputs array changes on every call
-  inputs?: mixed[],
+  inputs?: unknown[],
 ): T {
   return useMemoOne(() => callback, inputs);
 }

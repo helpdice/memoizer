@@ -1,16 +1,17 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type ReactNode } from 'react';
 import { mount } from 'enzyme';
 import { useMemoOne } from '../src';
 
-type WithMemoProps = {|
-  inputs?: mixed[],
-  children: (value: mixed) => Node,
-  getResult: () => mixed,
-|};
+// Exact
+type WithMemoProps = {
+  inputs?: unknown[],
+  children: (value: unknown) => Node,
+  getResult: () => unknown,
+};
 
 function WithMemo(props: WithMemoProps) {
-  const value: mixed = useMemoOne(props.getResult, props.inputs);
+  const value: unknown = useMemoOne(props.getResult, props.inputs);
   return props.children(value);
 }
 
