@@ -1,6 +1,6 @@
 {
   "name": "@helpdice/memoizer",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "useMemo and useCallback but with a stable cache",
   "keywords": [
     "memoization",
@@ -31,8 +31,10 @@
     "@babel/preset-env": "^7.5.2",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.2",
     "@rollup/plugin-typescript": "^12.3.1",
+    "@types/react": "^19.3.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.2",
     "babel-jest": "^24.8.0",
@@ -53,7 +55,7 @@
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "rimraf": "^2.6.3",
-    "rollup": "^1.32.1",
+    "rollup": "^4.68.2",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.1",
     "rollup-plugin-replace": "^2.2.0",

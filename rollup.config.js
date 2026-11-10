@@ -2,11 +2,13 @@
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
+import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import terser from '@rollup/plugin-terser';
 
 const input = 'src/index.ts';
-const excludeAllExternals = id => !id.startsWith('.') && !id.startsWith('/');
+// const excludeAllExternals = id => !id.startsWith('.') && !id.startsWith('/');
+const excludeAllExternals = ['react'];
 
 const config = {
       tsconfig: './tsconfig.json',
@@ -29,6 +31,7 @@ export default [
     },
     external: ['react'],
     plugins: [
+      resolve(),
       // Setting development env before running babel etc
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
       babel(),
@@ -47,6 +50,7 @@ export default [
     },
     external: ['react'],
     plugins: [
+      resolve(),
       // Setting production env before running babel etc
       replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
       babel(),
@@ -63,7 +67,7 @@ export default [
       file: 'dist/memoizer.esm.js',
       format: 'esm',
     },
-    plugins: [babel(), typescript(config)],
+    plugins: [resolve(), babel(), typescript(config)],
   },
   // CommonJS build
   {
@@ -73,6 +77,6 @@ export default [
       file: 'dist/memoizer.cjs.js',
       format: 'cjs',
     },
-    plugins: [babel(), typescript(config)],
+    plugins: [resolve(), babel(), typescript(config)],
   },
 ];
